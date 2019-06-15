@@ -143,15 +143,15 @@ songplay_table_insert = ("""
 insert into songplays(start_time, user_id, level, song_id, artist_id, session_id, location, user_agent)
 with artist_songs as (
     select 
-        s.song_id as song_id,
-        s.title as song_title,
-        s.duration as length,
-        a.artist_id as artist_id,
-        a.name as artist_name, 
-        a.location
-    from artists a
+        ss.song_id as song_id,
+        ss.title as song_title,
+        ss.duration as length,
+        ss.artist_id as artist_id,
+        ss.name as artist_name, 
+        ss.location
+    from staging_songs ss 
     inner join songs s
-    on s.artist_id=a.artist_id
+    on ss.artist_id=s.artist_id
 )
 select
      timestamp 'epoch' + FLOAT8(e.ts)/1000 * interval '1 second' as start_time,
