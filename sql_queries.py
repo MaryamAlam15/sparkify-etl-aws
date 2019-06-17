@@ -143,12 +143,12 @@ songplay_table_insert = ("""
 insert into songplays(start_time, user_id, level, song_id, artist_id, session_id, location, user_agent)
 with artist_songs as (
     select 
-        ss.song_id as song_id,
+        ss.song_id,
         ss.title as song_title,
         ss.duration as length,
-        ss.artist_id as artist_id,
-        ss.name as artist_name, 
-        ss.location
+        ss.artist_id,
+        ss.artist_name, 
+        ss.artist_location as location
     from staging_songs ss 
     inner join songs s
     on ss.artist_id=s.artist_id
