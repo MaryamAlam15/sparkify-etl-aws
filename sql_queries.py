@@ -62,11 +62,11 @@ songplays_table_create = ("""
 CREATE TABLE IF NOT EXISTS songplays 
 (
     songplay_id int IDENTITY(1,1) PRIMARY KEY, 
-    start_time timestamp, 
+    start_time timestamp NOT NULL, 
     user_id int NOT NULL, 
     level varchar, 
-    song_id varchar, 
-    artist_id varchar, 
+    song_id varchar NOT NULL, 
+    artist_id varchar NOT NULL, 
     session_id int, 
     location varchar, 
     user_agent varchar
@@ -231,7 +231,7 @@ insert into artists (
     longitude
 )
 select 
-    s.artist_id, 
+    distinct s.artist_id, 
     s.artist_name as name, 
     s.artist_location as location, 
     s.artist_latitude as latitude, 
